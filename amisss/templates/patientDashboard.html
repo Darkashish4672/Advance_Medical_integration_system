@@ -163,7 +163,7 @@ AMIS|Homepage
                                 <h4 class="text-custom-white fw-700">Appointments</h4>
 
                                 <p class="text-custom-white">Plan what you'd like to discuss with the doctor before your visit. ... most of your appointment whether you are starting with a new doctor or continuing
-                                <a href="{% url 'doctors'%}" class="btn-first btn-submit-white fw-600 scrollbtn">Book Appointment</a>
+                                <a href="#book-appointment" class="btn-first btn-submit-white fw-600 scrollbtn">Book Appointment</a>
 
                             </div>
 
@@ -1764,6 +1764,12 @@ Emotional, social and spiritual support providers.
 
 
   <!-- Theme skins -->
+  {% if status %}
+  <script>
+      alert("{{status}}");
+      window.location = "/patientDashboard/"
+  </script>
+  {%endif%}
 
     <!-- Place all Scripts Here -->
 

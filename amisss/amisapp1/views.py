@@ -70,8 +70,8 @@ def check(request):
 def service(request):
     return render(request,"service.html")
 
-def profile(request):
-    return render(request,"profile.html")
+def patientDashboard(request):
+    return render(request,"patientDashboard.html")
 
 def appointment(request):
     return render(request,"doctors.html")
@@ -129,6 +129,7 @@ def user_logout(request):
 
 
 def patientAppointmentBook(request):
+    context = {}
     if request.method == 'POST':
         name = request.POST['name'] 
         doctor_name = request.POST['doctor_name'] 
@@ -137,12 +138,12 @@ def patientAppointmentBook(request):
         date = request.POST['date'] 
         time = request.POST['time'] 
         massege = request.POST['massege'] 
-        print(name,doctor_name,phone,date,time,massege)
         data = patientBookAppointment(name=name,doctor=doctor_name,problems=problems,phone=phone,date=date,massage=massege)
         data.save()
-        return HttpResponse("hello")
+        context["status"] = "Appointment Book Successfully"
+        return render(request,"patientDashboard.html",context)
 
-def patientDashboard(request):
+def profile(request):
     context = {}
     check = userType_table.objects.filter(user__id=request.user.id)
     if len(check)>0:
@@ -179,7 +180,7 @@ def patientDashboard(request):
         data.postal = postal
         data.address = address
         data.save()
-        print(data)
+        
 
         context["status"] = "Changes Saved Successfully"
         context["user"] = usr
