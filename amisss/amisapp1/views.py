@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.contrib.auth.models import User
-from .models import userType_table,patientBookAppointment
+from .models import userType_table,patientBookAppointment,queryForm
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse,HttpResponseRedirect
@@ -103,10 +103,30 @@ def shop(request):
     return render(request,"services/pharma.html")
 
 
-def tech(request):
+def tech(request):  
     return render(request,"services/lab.html")
 def formservice(request):
-    return render(request,"services/serviceform.html")
+    context = {}
+    data = userType_table.objects.get(user__id=request.user.id)
+    data1 = User.objects.get(id=request.user.id)
+    context["data"] = data
+    context["data1"] = data1
+    if request.method == "POST":
+        name = request.POST["fname"]
+        address = request.POST["faddress"]
+        pin = request.POST["pin"]
+        gender = request.POST["gender"]
+        purpose = request.POST["purpose"]
+        email = request.POST["email"]
+        phone = request.POST["phone"]
+        print(name,email,purpose)
+        usr = queryForm(name=name,address=address,pin=pin,gender=gender,purpose=purpose,email=email,phone=phone)
+        usr.save()
+        context["status"] = "query submitted succesfull!"
+        return render(request,"profile.html",context)
+
+
+    return render(request,"services/serviceform.html",context)
 
 
 
@@ -117,7 +137,7 @@ def labDashboard(request):
     return render(request,"labDashboard.html")
 
 def pharmacistDashboard(request):
-    return render(request,"patientDashboard.html")
+    return render(request,"pharamacistDashboard.html")
 
 @login_required
 def user_logout(request):
@@ -143,6 +163,7 @@ def patientAppointmentBook(request):
         context["status"] = "Appointment Book Successfully"
         return render(request,"patientDashboard.html",context)
 
+@login_required
 def profile(request):
     context = {}
     check = userType_table.objects.filter(user__id=request.user.id)

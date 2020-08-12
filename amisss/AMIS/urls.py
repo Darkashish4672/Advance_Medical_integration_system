@@ -44,7 +44,7 @@ urlpatterns = [
     path('expert/', views.expert, name='expert'),
     path('shop/', views.shop, name='shop'),
     path('tech/', views.tech, name='tech'),
-    path('formservice', views.formservice, name='formservice')
+    path('formservice/', views.formservice, name='formservice')
 
 
 ]
