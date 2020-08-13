@@ -188,7 +188,7 @@ def profile(request):
         usr = User.objects.get(id=request.user.id)
         usr.first_name = fn
         usr.last_name = ln
-        usr.email = em
+        usr.username = em
         usr.save()
 
         
