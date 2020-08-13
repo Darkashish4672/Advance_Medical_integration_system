@@ -113,7 +113,7 @@ AMIS|Profile
               </div>
             </div>
             <div class="card-body">
-              <form action="{%url 'patientDashboard'%}" method="POST">
+              <form action="{%url 'profile'%}" method="POST">
                 {%csrf_token%}
                 <h6 class="heading-small text-white  mb-4">User information</h6>
                 <div class="pl-lg-4">
@@ -379,7 +379,7 @@ AMIS|Profile
     {% if status %}
     <script>
         alert("{{status}}");
-        window.location = "/patientDashboard/"
+        window.location = "/profile/"
     </script>
     {%endif%}
 
