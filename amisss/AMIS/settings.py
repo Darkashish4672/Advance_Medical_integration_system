@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'amisapp1',
+    'bootstrap4',
 ]
 
 MIDDLEWARE = [
@@ -125,3 +126,13 @@ STATICFILES_DIRS = [
     STATIC_DIR,
 
 ]
+
+
+#SMTP Configuration
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'kev15121998@gmail.com'
+EMAIL_HOST_PASSWORD = 'adarsh@1512'
